@@ -1,0 +1,56 @@
+@import "compass/css3";
+@import "compass/utilities/general/clearfix";
+
+@import "typography";
+
+/*
+ * Common mixins
+ *-------------------------------*/
+@mixin structural {
+	display: block;
+	text-indent: -9999px;
+}
+
+@mixin content {
+    padding: 0 2%;
+    position: relative;
+}
+
+@mixin unstyled-link {
+    text-decoration: none;
+    &:hover, &:visite, &:active { text-decoration: none; }
+    color: inherit;
+}
+
+
+/*------------------------------
+ * Page Wide params
+ *------------------------------*/
+$padding: 2%;
+
+* {
+    @include box-sizing(border-box);
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+}
+
+input[type=text] {
+    padding: 0.4em;
+}
+
+#app {
+
+    display: none;
+    overflow: hidden;
+    position: relative;
+
+}
+

@@ -1,0 +1,20 @@
+{
+    "name": "Cirle-and-Cross",
+    "version": "0.0.1",
+
+    "scripts": {
+        "install": "npm install -g jake"
+    },
+
+    "dependencies": {
+        "jake":  "*",
+        "jshint": "*",
+        "requirejs": "*",
+        "glob": "*",
+        "colorize": "*",
+        "express": "*",
+        "jasmine-node": "*",
+        "socket.io": "*"
+    }
+
+}
