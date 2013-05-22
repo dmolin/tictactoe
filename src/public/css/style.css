@@ -3,6 +3,11 @@
     font-family: "Swanky and Moo Moo"
 }
 
+a, a:visited, a:active, a:hover {
+    color: black;
+    text-decoration: none
+}
+
 h1 {
     text-align: center;
 }
@@ -23,19 +28,32 @@ h1 {
     vertical-align: top;
 }
 
-.board td div {
+.board td a {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 9em;
+    line-height: 80%;
+}
+
+.board td div {
+    position: relative;
     width: 100%;
     height: 100%;
 }
 
-.board td div.crossed {
-    background: url('../images/crossed.png') center center no-repeat;
 
+.board td div.crossed {
 }
 
-.board td .cell.winning-true {
-    background: url('../images/crossed-winning.png') center center no-repeat;
+
+.board td .cell.winning- {
+    color: black;
+}
+
+.board td .cell.winning-true a {
+    color: red;
 }
 
 * {
@@ -47,6 +65,10 @@ h1 {
         width: 400px;
         height: 400px;
         background-size: 102% 125%;
+    }
+
+    .board td a {
+        font-size: 12em;
     }
 
 }

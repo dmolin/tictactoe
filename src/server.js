@@ -59,9 +59,13 @@ io.on('connection', onSIOConnect);
 
 function onSIOConnect (socket) {
     socket.emit("connected", {});
+    console.log("Receiving connection from client ", socket.id);
     //handle client messages (if any)
 
     //each client will send a message with the move of the player
+    socket.on("board:move", function(move){
+        console.log("MOVE", move);
+    });
     //we broadcast to the other connected client
 }
 
@@ -73,7 +77,7 @@ require('./routes/game').init(app,scope);
 
 if (!module.parent) {
     var port = process.env.PORT || 3000;
-    server.listen(port);
+    server.listen(port, '127.0.0.1');
     console.log("TicTacToe server listening on port %d within %s environment", port, app.settings.env);
 }
 

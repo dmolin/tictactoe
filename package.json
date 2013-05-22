@@ -1,9 +1,13 @@
 {
-    "name": "Cirle-and-Cross",
+    "name": "TicTacToe",
     "version": "0.0.1",
 
     "scripts": {
         "install": "npm install -g jake"
+    },
+
+    "devDependencies": {
+        "awsbox":"*"
     },
 
     "dependencies": {
@@ -14,7 +18,7 @@
         "colorize": "*",
         "express": "*",
         "jasmine-node": "*",
-        "socket.io": "*"
+        "socket.io": "*",
     }
 
 }

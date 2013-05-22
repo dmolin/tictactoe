@@ -12,6 +12,21 @@
 
 
   <!-- include source files here... -->
+  <script>
+  //mocking socket.io
+  io = {
+    connect: function(){
+      return {
+        socket: {
+          on: function(){},
+          send: function(){},
+          emit: function(){},
+          connect: function(){}
+        }
+      };
+    }
+  };
+  </script>
   <script src="../js/lib/handlebars-1.0.0.beta.6.js"></script>
   <script src="../js/lib/require/require.js"></script>
   <script src="app.js"></script>

@@ -6,8 +6,9 @@ define([
 ], function( $, _, Backbone, CellModel) {
 
     var tpl = [
-    '<a href="#"><div class="cell {{model.state}} winning-{{model.winning}}">',
-    '</div></a>'
+    '<div class="cell {{model.state}} winning-{{model.winning}}">',
+        '<a href="#">{{model.text}}</a>',
+    '</div>'
     ].join('');
 
     var template = Handlebars.compile(tpl);
@@ -42,7 +43,7 @@ define([
                 return;
             }
 
-            //change the state of the cell to cross (the AI drives the circle)
+            //change the state of the cell
             this.model.set('state', 'crossed');
             this.$('a').removeAttr('href');
 

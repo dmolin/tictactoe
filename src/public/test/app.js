@@ -12055,6 +12055,44 @@ define('backbone',[
   return Backbone.noConflict();
 
 });
+define('app',[
+    'backbone'
+], function( Backbone ) {
+
+	var initialize = function(config) {
+		console.log( "app initialize" );
+        this.io = config.sio;
+        this.socket = this.io.connect( document.location.protocol, '//' + document.location.hostname );
+        //this.socket = config.socket;
+        //this.socket.connect();
+        this.inited = false;
+
+        /*
+        Backbone.on('status:connected', function (data) {
+            if(!this.inited) {
+                //emit inited application signal
+                Backbone.trigger("appready");
+                Backbone.history.start();
+                this.inited = true;
+            }
+        }, this);
+        */
+        var self = this;
+        this.socket.on("connect", function(data){
+            if(!self.inited) {
+                //emit inited application signal
+                Backbone.trigger("appready");
+                Backbone.history.start();
+                self.inited = true;
+            }
+        });
+
+	};
+
+	return {
+		initialize: initialize
+	};
+});
 define('js/modules/tictactoe/models/cell.js',[
     'jquery',
     'underscore',
@@ -12066,11 +12104,21 @@ define('js/modules/tictactoe/models/cell.js',[
         defaults: {
             id: 0,
             state: 'empty',
-            winning: false
+            winning: false,
+            text: ''
+        },
+
+        initialize: function(){
+            this.on('change:state', this._setContent, this);
         },
 
         isEmpty: function() {
             return this.get('state') === 'empty';
+        },
+
+        _setContent: function() {
+            var state = this.get('state');
+            this.set('text', ( state === 'empty' ? '' : state === 'crossed' ? 'X' : 'O' ));
         }
     });
 
@@ -12084,8 +12132,9 @@ define('js/modules/tictactoe/views/cell.js',[
 ], function( $, _, Backbone, CellModel) {
 
     var tpl = [
-    '<a href="#"><div class="cell {{model.state}} winning-{{model.winning}}">',
-    '</div></a>'
+    '<div class="cell {{model.state}} winning-{{model.winning}}">',
+        '<a href="#">{{model.text}}</a>',
+    '</div>'
     ].join('');
 
     var template = Handlebars.compile(tpl);
@@ -12120,7 +12169,7 @@ define('js/modules/tictactoe/views/cell.js',[
                 return;
             }
 
-            //change the state of the cell to cross (the AI drives the circle)
+            //change the state of the cell
             this.model.set('state', 'crossed');
             this.$('a').removeAttr('href');
 
@@ -12143,8 +12192,9 @@ define('js/modules/tictactoe/views/board.js',[
     'underscore',
     'backbone',
     './cell.js',
-    '../models/cell.js'
-], function( $, _, Backbone, Cell, CellModel) {
+    '../models/cell.js',
+    "app"
+], function( $, _, Backbone, Cell, CellModel, App) {
 
     var tpl = [
         '<table class="board">',
@@ -12199,14 +12249,21 @@ define('js/modules/tictactoe/views/board.js',[
         _checkMove: function(move) {
             var board = this;
 
+            //store the move in player record (we assume the move is always from the only player present, the one with the cross)
+            this.player.moves[move.id] = 1;  //signal the move (eg: { 0: 1 } means 1 check in the cell 0)
+
             //we should delegate to some kind of REST service here, but because it's just a simple example
             //we'll implement the game logic here
+
+            //console.log("APP", App);
+            App.socket.emit("board:move", {
+                gameId: '1',  //should be received from the server on game access,
+                moves: this.player.moves //send all the moves, since the server is stateless
+            });
+
             var winningMoves = [
                 [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
             ];
-
-            //store the move in player record (we assume the move is always from the only player present, the one with the cross)
-            this.player.moves[move.id] = 1;  //signal the move (eg: { 0: 1 } means 1 check in the cell 0)
 
             //check moves against winning ones
             winningMoves.every(function(element, index, list) {
@@ -12290,20 +12347,6 @@ define('js/modules/tictactoe/routers/routes.js', [
         return new Router();
     }
 );
-define('app',[
-    'backbone',
-    'js/modules/tictactoe/routers/routes.js'
-], function( Backbone, TicTacToeRoutes ) {
-
-	var initialize = function() {
-		console.log( "app initialize" );
-        Backbone.history.start();
-	};
-
-	return {
-		initialize: initialize
-	};
-});
 require.config( {
 	//urlArgs: "bust=" + (new Date()).getTime(),  //cache busting for development
 	shim: {
@@ -12325,7 +12368,8 @@ require.config( {
 		"backbone": '/js/lib/backbone/loader',
 		"text": '/js/lib/require/text',
 		"templates": '/templates',
-		"app": '/js/app'
+		"app": '/js/app',
+        "socketio": '/js/socketio'
 	}
 });
 
@@ -12333,10 +12377,13 @@ require([
 	"jquery",
 	"underscore",
 	"backbone",
-	"app"
-], function( $, _, Backbone, App ) {
+	"app",
+    'js/modules/tictactoe/routers/routes.js',
+    //"socketio"
+], function($, _, Backbone, App, Routes, Socket ) {
 
 	console.log("ready");
-	App.initialize();
+	//App.initialize({socket: new Socket({vent: Backbone, io:{port:document.location.port}}).socket});
+    App.initialize({sio: io});
 });
 define("js/bootstrap", function(){});

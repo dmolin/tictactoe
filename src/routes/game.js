@@ -8,9 +8,9 @@ var scope;
 
 
 exports.init = function (app, data) {
-    scope = data ? data : {game:{masterword:'', highscores:[]}};
+    scope = data ? data : {game:{}};
     if(!scope.game) {
-        scope.game = {masterword:'', highscores:[]};
+        scope.game = {};
     }
 
     //app.post('/anagram/init/:masterword', initMasterword);

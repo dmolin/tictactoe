@@ -3,8 +3,9 @@ define([
     'underscore',
     'backbone',
     './cell.js',
-    '../models/cell.js'
-], function( $, _, Backbone, Cell, CellModel) {
+    '../models/cell.js',
+    "app"
+], function( $, _, Backbone, Cell, CellModel, App) {
 
     var tpl = [
         '<table class="board">',
@@ -59,14 +60,21 @@ define([
         _checkMove: function(move) {
             var board = this;
 
+            //store the move in player record (we assume the move is always from the only player present, the one with the cross)
+            this.player.moves[move.id] = 'X';  //signal the move (eg: { 0: 'X' } means 'X' check in the cell 0)
+
             //we should delegate to some kind of REST service here, but because it's just a simple example
             //we'll implement the game logic here
+
+            //console.log("APP", App);
+            App.socket.emit("board:move", {
+                gameId: '1',  //should be received from the server on game access,
+                moves: this.player.moves //send all the moves, since the server is stateless
+            });
+
             var winningMoves = [
                 [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6]
             ];
-
-            //store the move in player record (we assume the move is always from the only player present, the one with the cross)
-            this.player.moves[move.id] = 1;  //signal the move (eg: { 0: 1 } means 1 check in the cell 0)
 
             //check moves against winning ones
             winningMoves.every(function(element, index, list) {

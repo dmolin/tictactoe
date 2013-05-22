@@ -19,7 +19,8 @@ require.config( {
 		"backbone": '/js/lib/backbone/loader',
 		"text": '/js/lib/require/text',
 		"templates": '/templates',
-		"app": '/js/app'
+		"app": '/js/app',
+        "socketio": '/js/socketio'
 	}
 });
 
@@ -27,9 +28,12 @@ require([
 	"jquery",
 	"underscore",
 	"backbone",
-	"app"
-], function( $, _, Backbone, App ) {
+	"app",
+    'js/modules/tictactoe/routers/routes.js',
+    //"socketio"
+], function($, _, Backbone, App, Routes, Socket ) {
 
 	console.log("ready");
-	App.initialize();
+	//App.initialize({socket: new Socket({vent: Backbone, io:{port:document.location.port}}).socket});
+    App.initialize({sio: io});
 });

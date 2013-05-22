@@ -63,7 +63,8 @@ task("test-client", ["lint"], function() {
                 "underscore": 'js/lib/underscore/loader',
                 "backbone": 'js/lib/backbone/loader',
                 "text": 'js/lib/require/text',
-                "app": 'js/app'
+                "app": 'js/app',
+                "socketio": "js/socketio"
             },
             optimize: "none",
             out: "src/public/test/app.js"
@@ -112,7 +113,7 @@ task("test-server", ["lint"], function() {
 }, {async: true});
 
 desc("Runs the Server");
-task("server", ["test"], function() {
+task("server", [], function() {
     sh("node src/server", true, function(out){
         complete();
     });
