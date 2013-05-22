@@ -3,7 +3,6 @@
     "version": "0.0.1",
 
     "scripts": {
-        "install": "npm install -g jake"
     },
 
     "devDependencies": {
