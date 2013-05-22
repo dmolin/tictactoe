@@ -18,7 +18,7 @@
         "colorize": "*",
         "express": "*",
         "jasmine-node": "*",
-        "socket.io": "*",
+        "socket.io": "*"
     }
 
 }
