@@ -7,6 +7,8 @@ This game (still in early development) serves the purpose of showing how to impl
 
 ![Tic Tac Toe in action](https://raw.github.com/dmolin/tictactoe/master/README/tictactoe.png)
 
+The game can be seen/played [here](http://54.235.13.179)
+
 
 ## Technologies Used ##
 
