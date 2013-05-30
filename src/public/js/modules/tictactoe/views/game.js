@@ -8,7 +8,7 @@ define([
 
     var tpl = [
     '<div id="tictactoe">',
-        '<h1>Circle And Cross Game</h1>',
+        '<h1>Tic Tac Toe</h1>',
         '<div id="board"></div>',
     '</div>'
     ].join('');

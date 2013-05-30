@@ -1,6 +1,13 @@
 #application {
     overflow: hidden;
-    font-family: "Swanky and Moo Moo"
+    font-family: "Swanky and Moo Moo";
+    min-width: 300px;
+}
+
+.is-loading {
+    text-align: center;
+    display: block;
+    margin-top: 10em;
 }
 
 a, a:visited, a:active, a:hover {
