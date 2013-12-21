@@ -2,22 +2,9 @@
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks("grunt-jasmine-node");
 
     grunt.initConfig({
-        jasmine_node: {
-            specNameMatcher: "\.spec", // load only specs containing specNameMatcher
-            projectRoot: "test",
-            requirejs: false,
-            forceExit: true,
-            jUnit: {
-                report: false,
-                savePath : "./build/reports/jasmine/",
-                useDotNotation: true,
-                consolidate: true
-            },
-            all: ['test/']
-        },
+        nodeunit: ['test/**/*.js'],
 
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
@@ -47,7 +34,7 @@ module.exports = function (grunt) {
         grunt.log.subhead(Date());
     });
 
-    grunt.registerTask('default', ['jshint','jasmine_node']);
+    grunt.registerTask('default', ['jshint','nodeunit']);
 
     grunt.registerTask('supervise', function() {
         this.async();

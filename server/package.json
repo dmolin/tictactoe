@@ -3,9 +3,6 @@
     "version": "0.0.1-SNAPSHOT",
     "description": "Express Server for the Muliplayer TicTacToe game",
 
-    "scripts": {
-    },
-
     "engines": {
         "node": ">= 0.10.0"
     },
@@ -20,7 +17,7 @@
         "grunt-contrib-concat": "*",
         "grunt-contrib-uglify": "*",
         "grunt-contrib-watch": "*",
-        "grunt-contrib-nodeunit": "*"
+        "grunt-jasmine-node": "*"
     },
 
     "dependencies": {
