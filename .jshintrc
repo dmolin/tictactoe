@@ -7,7 +7,7 @@
     "esnext":       true,
     "jquery":       true,
     "browser":      true,
-
+    "sub":          true,
     "maxerr":       100,
     "predef": [
         "module",

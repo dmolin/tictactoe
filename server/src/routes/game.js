@@ -6,7 +6,6 @@ var Game = require('../services/TicTacToeService');
 //this will be used to access the application-wide in-memory scope
 var scope;
 
-
 exports.init = function (app, data) {
     scope = data ? data : {game:{}};
     if(!scope.game) {

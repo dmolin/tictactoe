@@ -2,7 +2,7 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    '../models/cell.js'
+    'cell.js'
 ], function( $, _, Backbone, CellModel) {
 
     var Model = Backbone.Model.extend({

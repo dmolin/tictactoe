@@ -45,7 +45,7 @@ var io, iosetting;
 app.configure(function() {
 	app.use(express.logger('dev')); //default, short, tiny, dev
 	app.use(express.bodyParser());
-    app.use(express['static'](path.join(__dirname, 'public')));
+    app.use(express['static'](path.join(__dirname, '../../client/dist/')));
 });
 
 server = http.createServer(app);
@@ -73,7 +73,7 @@ function onSIOConnect (socket) {
 //for the sake of simplicity, let's have an exported global scope named "data",
 //that will be used as an in-memory scope for the running application
 var scope = {};
-require('./routes/game').init(app,scope);
+require('routes/game').init(app,scope);
 
 if (!module.parent) {
     var port = process.env.PORT || 3000;

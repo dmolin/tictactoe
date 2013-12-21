@@ -12250,7 +12250,7 @@ define('js/modules/tictactoe/views/board.js',[
             var board = this;
 
             //store the move in player record (we assume the move is always from the only player present, the one with the cross)
-            this.player.moves[move.id] = 1;  //signal the move (eg: { 0: 1 } means 1 check in the cell 0)
+            this.player.moves[move.id] = 'X';  //signal the move (eg: { 0: 'X' } means 'X' check in the cell 0)
 
             //we should delegate to some kind of REST service here, but because it's just a simple example
             //we'll implement the game logic here
@@ -12297,7 +12297,7 @@ define('js/modules/tictactoe/views/game.js',[
 
     var tpl = [
     '<div id="tictactoe">',
-        '<h1>Circle And Cross Game</h1>',
+        '<h1>Tic Tac Toe</h1>',
         '<div id="board"></div>',
     '</div>'
     ].join('');
