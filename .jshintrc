@@ -5,7 +5,6 @@
     "node":         true,
     "es5":          true,
     "esnext":       true,
-    "jquery":       true,
     "browser":      true,
     "sub":          true,
     "maxerr":       100,

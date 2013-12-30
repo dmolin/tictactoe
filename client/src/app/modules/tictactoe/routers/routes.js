@@ -1,21 +1,17 @@
-define( [
-    'backbone',
-    '../views/game.js'
-    ],
-    //function($, _, Backbone, search ) {
-    function( Backbone, gameView ) {
-        var Router = Backbone.Router.extend( {
-            routes: {
-                '/': 'enterGame',
-                '*actions': 'enterGame'
-            },
+var Backbone = require('Backbone'),
+    GameView = require('../views/game');
 
-            enterGame: function() {
-                gameView.init();
-                gameView.render();
-            }
-        });
+var Router = Backbone.Router.extend({
+    routes: {
+        '/': 'enterGame',
+        '*actions': 'enterGame'
+    },
 
-        return new Router();
+    enterGame: function() {
+        var gameView = new GameView();
+        gameView.init();
+        gameView.render();
     }
-);
+});
+
+module.exports = new Router();

@@ -2,10 +2,19 @@
 module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-browserify');
+
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     grunt.initConfig({
-        nodeunit: ['test/**/*.js'],
-
+        distdir: 'dist',
+        pkg: grunt.file.readJSON('package.json'),
+        banner: '',
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
             options: {
@@ -28,18 +37,58 @@ module.exports = function (grunt) {
             }
         },
 
+        src: {
+            js: ['src/**/*.js'],
+            //jsTpl: ['<%= distdir %>/templates/**/*.js'],
+            specs: ['test/**/*.spec.js'],
+            html: ['src/index.html']
+        },
+
+        clean: ['<%= distdir %>/*'],
+
+        copy: {
+            assets: {
+                files: [{ dest: '<%= distdir %>', src : '**', expand: true, cwd: 'src/static/' }]
+            }
+        },
+
+        concat:{
+            index: {
+                src: ['src/index.html'],
+                dest: '<%= distdir %>/index.html',
+                options: {
+                    process: true
+                }
+            }
+        },
+
+        browserify: {
+            dist: {
+                files: {
+                    'dist/app.js': ['src/app/**/*.js']
+                }
+            },
+            options: {
+                /*
+                shim: {
+                    "Backbone": "./vendor/backbone/backbone.js"
+                }
+                */
+            }
+        },
+
+        watch: {
+            files: ["src/app/**/*.js"],
+            tasks: ['browserify:dist']
+        }
     });
 
     grunt.registerTask('timestamp', function() {
         grunt.log.subhead(Date());
     });
 
-    grunt.registerTask('default', ['jshint','nodeunit']);
-
-    grunt.registerTask('supervise', function() {
-        this.async();
-        require('supervisor').run(['src/server.js']);
-    });
+    grunt.registerTask('default', ['jshint','build']);
+    grunt.registerTask('build', ['clean','jshint','concat','copy:assets', 'browserify']);
 };
 
 //--- Gruntfile.js:end

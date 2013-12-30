@@ -73,7 +73,7 @@ function onSIOConnect (socket) {
 //for the sake of simplicity, let's have an exported global scope named "data",
 //that will be used as an in-memory scope for the running application
 var scope = {};
-require('routes/game').init(app,scope);
+require('./routes/game').init(app,scope);
 
 if (!module.parent) {
     var port = process.env.PORT || 3000;

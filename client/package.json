@@ -1,9 +1,8 @@
 {
-    "name": "TicTacToeServer",
+    "name": "TicTacToeClient",
     "version": "0.0.1-SNAPSHOT",
 
     "scripts": {
-        "npm install -g browserify"
     },
 
     "engines": {
@@ -18,7 +17,11 @@
         "grunt-contrib-jshint": "*",
         "grunt-contrib-concat": "*",
         "grunt-contrib-uglify": "*",
-        "grunt-contrib-watch": "*"
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-jasmine": "*",
+        "jquery-browserify": "*",
+        "backbone": "*",
+        "underscore": "*"
     },
 
     "dependencies": {
