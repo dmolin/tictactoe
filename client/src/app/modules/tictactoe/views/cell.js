@@ -9,8 +9,6 @@ var tpl = [
 '</div>'
 ].join('');
 
-var template = _.template(tpl);
-
 var View = Backbone.View.extend({
     el: "div",
 
@@ -18,6 +16,8 @@ var View = Backbone.View.extend({
         'click a': 'onCellClick',
         'touchend a': 'onCellClick'
     },
+
+    template: _.template(tpl),
 
     initialize: function(options) {
         this.options = options;
@@ -28,7 +28,7 @@ var View = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html( template({model: this.model.attributes}) );
+        this.$el.html( this.template({model: this.model.attributes}) );
         return this;
     },
 
