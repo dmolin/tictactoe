@@ -4,29 +4,31 @@
     "description": "Express Server for the Muliplayer TicTacToe game",
 
     "engines": {
-        "node": ">= 0.10.0"
+        "node": ">= 0.10.20"
     },
 
     "devDependencies": {
         "rewire": "*",
         "supervisor": "*",
-        "grunt":  "*",
+        "grunt":  "~0.4.4",
         "grunt-contrib-clean": "*",
         "grunt-contrib-copy": "*",
-        "grunt-contrib-jshint": "*",
+        "grunt-contrib-jshint": "~0.1.0",
         "grunt-contrib-concat": "*",
         "grunt-contrib-uglify": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-jasmine-node": "*"
+        "grunt-contrib-watch": "~0.1.0",
+        "mocha": "~1.17.1",
+        "grunt-cafe-mocha": "~0.1.12",
+        "chai": "*"
     },
 
     "dependencies": {
-        "express": "*",
+        "express": "~3.1.0",
         "passport": "*",
         "passport-local": "*",
         "express-namespace": "*",
         "request": "*",
-        "socket.io": "*"
+        "socket.io": "~0.9.0"
     }
 
 }

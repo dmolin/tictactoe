@@ -1,4 +1,4 @@
-var Backbone = require('Backbone'),
+var Backbone = require('backbone'),
     GameView = require('../views/game');
 
 var Router = Backbone.Router.extend({

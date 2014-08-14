@@ -1,4 +1,4 @@
-var Backbone = require('Backbone'),
+var Backbone = require('backbone'),
     $ = Backbone.$,
     _ = require('underscore'),
     CellModel = require('../models/cell');

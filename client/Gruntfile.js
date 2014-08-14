@@ -69,11 +69,11 @@ module.exports = function (grunt) {
                 }
             },
             options: {
-                /*
+				/*
                 shim: {
                     "Backbone": "./vendor/backbone/backbone.js"
                 }
-                */
+				*/
             }
         },
 

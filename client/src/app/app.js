@@ -1,4 +1,4 @@
-var Backbone = require('Backbone');
+var Backbone = require('backbone');
 
 var initialize = function(config) {
     console.log( "app initialize" );

@@ -1,6 +1,8 @@
 /*jshint devel:true, node:true, strict:false */
 /*global require */
 
+"use strict";
+
 /**
  * Requirements:
  *
@@ -36,15 +38,15 @@
 var express = require('express'),
     path = require('path'),
     http = require("http"),
-	app = express(),
+    app = express(),
     server;
 
 var sio = require('socket.io');
 var io, iosetting;
 
 app.configure(function() {
-	app.use(express.logger('dev')); //default, short, tiny, dev
-	app.use(express.bodyParser());
+    app.use(express.logger('dev')); //default, short, tiny, dev
+    app.use(express.bodyParser());
     app.use(express['static'](path.join(__dirname, '../../client/dist/')));
 });
 
