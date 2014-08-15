@@ -5,20 +5,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-cafe-mocha");
 
     grunt.initConfig({
-        jasmine_node: {
-            specNameMatcher: ".spec", // load only specs containing specNameMatcher
-            projectRoot: "test",
-            requirejs: false,
-            forceExit: true,
-            jUnit: {
-                report: false,
-                savePath : "./build/reports/jasmine/",
-                useDotNotation: true,
-                consolidate: true
-            },
-            all: ['test/']
-        },
-
         cafemocha: {
             test: {
                 src: "test/*.spec.js",
