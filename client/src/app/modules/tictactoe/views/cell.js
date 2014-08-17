@@ -1,6 +1,7 @@
 var Backbone = require('backbone'),
     $ = Backbone.$,
     _ = require('underscore'),
+    base = require("backbone.base"),
     CellModel = require('../models/cell');
 
 var tpl = [
@@ -9,7 +10,7 @@ var tpl = [
 '</div>'
 ].join('');
 
-var View = Backbone.View.extend({
+var CellView = base.View.extend({
     el: "div",
 
     events: {
@@ -27,10 +28,11 @@ var View = Backbone.View.extend({
         Backbone.on("cells:winning", this.checkAgainstWinningCells, this);
     },
 
+    /*
     render: function() {
         this.$el.html( this.template({model: this.model.attributes}) );
         return this;
-    },
+    },*/
 
     onCellClick: _.debounce(function(e) {
         if(e) {
@@ -57,4 +59,4 @@ var View = Backbone.View.extend({
 
 });
 
-module.exports = View;
+module.exports = CellView;

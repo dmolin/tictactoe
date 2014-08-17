@@ -20,13 +20,14 @@
         "grunt-contrib-concat": "*",
         "grunt-contrib-uglify": "*",
         "grunt-contrib-watch": "*",
-        "grunt-contrib-jasmine": "*",
-        "jquery-browserify": "*",
-        "backbone": "*",
-        "underscore": "*"
+        "grunt-contrib-jasmine": "*"
     },
 
     "dependencies": {
+        "jquery-browserify": "*",
+        "backbone": "*",
+        "underscore": "*",
+        "backbone.base": "*"
     }
 
 }
